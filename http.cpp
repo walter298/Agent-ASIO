@@ -14,9 +14,7 @@ namespace netlib {
 		{
 		}
 		void client::connect(std::string_view host_name) {
-			std::cout << host_name << '\n';
 			if (!SSL_set_tlsext_host_name(m_stream.native_handle(), host_name.data())) {
-				std::cout << "Error\n";
 				beast::error_code ec{ static_cast<int>(::ERR_get_error()), asio::error::ssl_category };
 				throw beast::system_error{ ec };
 			}

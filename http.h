@@ -42,7 +42,7 @@ namespace netlib {
 
             template<std::invocable<response> completion_handler>
             asio::awaitable<void> async_send(const request& req, completion_handler&& handler) {
-                request resp;
+                response resp;
                 co_await bhttp::async_write(m_stream, req, asio::use_awaitable);
                 co_await bhttp::async_read(m_stream, m_buff, resp, asio::use_awaitable);
                 handler(std::move(resp));
